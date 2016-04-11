@@ -4,6 +4,8 @@ import { EventEmitter } from 'events';
 
 const CHANGE_EVENT = 'change';
 
+var _counter = 0;
+
 const AppStore = Object.assign(EventEmitter.prototype, {
   emitChange(){
     this.emit( CHANGE_EVENT )
@@ -14,14 +16,18 @@ const AppStore = Object.assign(EventEmitter.prototype, {
   removeChangeListener( callback ){
     this.removeListener( CHANGE_EVENT, callback )
   },
+  getCurrentCount(){
+    return _counter;
+  },
   dispatcherIndex: register( function( action ){
-    console.log("WEEE")
-    console.log(action)
-    // switch(action.actionType){
-    //   case 'add':
-    //   console.log("HERE")
-    //     break;
-    // }
+    switch(action.actionType){
+      case AppConstants.INCREMENT:
+        _counter++;
+        break;
+      case AppConstants.DECREMENT:
+        _counter--;
+        break;
+    }
     AppStore.emitChange();
   })
 })

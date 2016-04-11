@@ -1,3 +1,4 @@
 export default {
-  INCREMENT: 'INCREMENT'
+  INCREMENT: 'INCREMENT',
+  DECREMENT: 'DECREMENT'
 }
